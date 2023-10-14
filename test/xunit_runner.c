@@ -32,5 +32,5 @@ int main(int argc, char **argv) {
 
     basic_group(&runner);
 
-    return XTEST_RUNNER_END(&runner);
+    return XTEST_RUNNER_END(runner);
 } // end of func
