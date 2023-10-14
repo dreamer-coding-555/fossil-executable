@@ -28,9 +28,9 @@ extern void basic_group(XUnitRunner *runner);
 // XUNIT-RUNNER: running test groups from test files
 //
 int main(int argc, char **argv) {
-    XUnitRunner runner = xtest_start(argc, argv);
+    XUnitRunner runner = XTEST_RUNNER_START(argc, argv);
 
     basic_group(&runner);
 
-    return xtest_end(&runner);
+    return XTEST_RUNNER_END(&runner);
 } // end of func
