@@ -1,0 +1,105 @@
+name: Host System Tester
+
+on:
+  pull_request:
+    branches:
+      - "main"
+    paths:
+      - "**.c"
+      - "**.h"
+      - "**.txt"
+      - "**.build"
+
+permissions:
+  contents: read
+
+jobs:
+  host_macosx:
+    strategy:
+      matrix:
+        os: [10.15, 11, 12, 13]  # macOS versions
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+        architecture: x64
+    - name: Install Meson Build System
+      run: |
+          pip install meson==1.0.0 ninja==1.11.1 scan-build
+          brew install cppcheck
+    - name: Setup Build Directory
+      run: |
+            scan-build meson setup builddir -Dwith_xunit=enabled
+    - name: Scan Compile Commands
+      run: |
+            cppcheck --project=builddir/compile_commands.json
+    - name: Compile Source Code
+      run: |
+            scan-build meson compile -C builddir -v
+    - name: Test Project Code
+      run: |
+            scan-build meson test -C builddir -v
+
+  host_windows:
+    strategy:
+      matrix:
+        os: ['windows-latest', 'windows-2022']
+        mingw: [false, 'mingw32', 'mingw64', 'MSYS']
+    runs-on: ${{ matrix.os }}
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+        architecture: x64
+    - name: Setup MinGW/MSYS
+      if: matrix.mingw != false
+      uses: msys2/setup-msys2@v2
+      with:
+        msystem: ${{ matrix.mingw }}
+        update: true
+    - name: Install Meson Build System
+      run: |
+          pip install meson==1.0.0 ninja==1.11.1
+    - name: Setup Build Directory
+      run: |
+            meson setup builddir -Dwith_xunit=enabled
+    - name: Compile Source Code
+      run: |
+            meson compile -C builddir -v
+    - name: Test Project Code
+      run: |
+            meson test -C builddir -v
+
+  host_ubuntu:
+    strategy:
+      matrix:
+        ubuntu_version: ['latest', '22.04', '20.04']
+    runs-on: ubuntu-${{ matrix.ubuntu_version }}
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+        architecture: x64
+    - name: Install Meson Build System
+      run: |
+          pip install meson==1.0.0 ninja==1.11.1 scan-build
+          sudo apt-get install -y cppcheck gcc
+    - name: Setup Build Directory
+      run: |
+            scan-build meson setup builddir -Dwith_xunit=enabled
+    - name: Scan Compile Commands
+      run: |
+            cppcheck --project=builddir/compile_commands.json
+    - name: Compile Source Code
+      run: |
+            scan-build meson compile -C builddir
+    - name: Test Project Code
+      run: |
+            scan-build meson test -C builddir -v
