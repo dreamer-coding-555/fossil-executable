@@ -11,6 +11,6 @@ if get_option('with_xunit').enabled()
     test('Execute project Xunit tests',
         executable('xrunner',
         test_src,
-        include_directories: [meson.project_source_root() / 'code'],
+        include_directories: include_directories(meson.project_source_root() / 'code'),
         dependencies : [test_deps, deps]))
 endif
