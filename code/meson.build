@@ -5,7 +5,9 @@ deps = [
     dependency('trilo-xdata-c')
 ]
 
+dir = include_directories('.')
+
 executable('app', ['main.c', code],
     dependencies: deps,
-    include_directories: '.',
+    include_directories: dir,
     install: true)
