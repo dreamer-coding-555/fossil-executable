@@ -1,1 +1,1 @@
-configure_file(input: 'data.txt', output: 'data.txt', copy: true)
+configure_file(input: 'data.txt', output: 'data.txt', install: true, copy: true)
