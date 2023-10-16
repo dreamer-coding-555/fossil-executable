@@ -1,1 +1,9 @@
-configure_file(input: 'data.txt', output: 'data.txt', install: true, copy: true)
+data = [
+    'data.txt'
+]
+
+foreach i : data
+    configure_file(input: i, output: i, copy: true)
+endforeach
+
+install_data(data)
