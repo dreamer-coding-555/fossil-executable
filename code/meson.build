@@ -11,5 +11,4 @@ dir = include_directories('.')
 executable('app', ['main.c', code],
     dependencies: deps,
     include_directories: dir,
-    win_subsystem: 'windows',
     install: true)
