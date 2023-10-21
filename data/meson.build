@@ -1,5 +1,6 @@
 data = [
-    'data.txt'
+    'data.txt',
+    'font.ttf'
 ]
 
 foreach i : data
