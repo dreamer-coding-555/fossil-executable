@@ -1,0 +1,6 @@
+[wrap-git]
+url = https://github.com/trilobite-stdlib/trilo-xtype-c.git
+revision = main
+
+[provide]
+trilo-xtype-c = trilo_xtype_c_dep
