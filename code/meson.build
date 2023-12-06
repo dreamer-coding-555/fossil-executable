@@ -3,8 +3,7 @@ code = files('app.c')
 deps = [
     dependency('trilo-xcore-c'),
     dependency('trilo-xtype-c'),
-    dependency('trilo-xdata-c'),
-    dependency('trilo-xmath-c')
+    dependency('trilo-xdata-c')
 ]
 
 dir = include_directories('.')
