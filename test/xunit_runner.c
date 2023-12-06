@@ -22,7 +22,7 @@
 // XUNIT-LIST: all test groups listed here so we can call
 //             the cases in main runner
 //
-extern void basic_group(XUnitRunner *runner);
+XTEST_GROUP_EXTERN(basic_group);
 
 //
 // XUNIT-RUNNER: running test groups from test files
@@ -30,7 +30,7 @@ extern void basic_group(XUnitRunner *runner);
 int main(int argc, char **argv) {
     XUnitRunner runner = XTEST_RUNNER_START(argc, argv);
 
-    basic_group(&runner);
+    XTEST_GROUP_REGISTER(basic_group, runner);
 
     return XTEST_RUNNER_END(runner);
 } // end of func
