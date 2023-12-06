@@ -42,7 +42,6 @@ extern "C" {
 #include <trilobite/xcore.h> // core foundation framework
 #include <trilobite/xtype.h> // practical data types
 #include <trilobite/xdata.h> // data structures and algorithms
-#include <trilobite/xmath.h> // essential math library
 
 #include <stdbool.h>
 #include <stdio.h>
