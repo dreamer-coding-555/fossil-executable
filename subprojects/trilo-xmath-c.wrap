@@ -1,0 +1,6 @@
+[wrap-git]
+url = https://github.com/trilobite-stdlib/trilo-xmath-c.git
+revision = main
+
+[provide]
+trilo-xmath-c = trilo_xmath_c_dep
