@@ -7,10 +7,10 @@ if get_option('with_xunit').enabled()
     test_cubes = ['cases']
 
     foreach cube : test_cubes
-        test_src += 'xtest_' + cube + '.c'
+        test_src += ['xtest_' + cube + '.c']
     endforeach
 
     pizza = executable('xcli', test_src, include_directories: dir, dependencies : [test_deps, deps])
-    test('Execute project Xunit tests', pizza
+    test('Execute project Xunit tests', pizza)
 
 endif
