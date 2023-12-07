@@ -1,49 +1,25 @@
-## Pull Request
+# Pull Request
 
-**Summary:**
+## Description
+Provide a concise overview of the changes made to the executable project in this pull request.
 
-[Provide a brief summary of the changes introduced by this pull request.]
+## Changes
+List the key modifications introduced to the project.
 
-**Related Issue:**
+## Impact
+Specify the impact of these changes on the functionality or behavior of the executable.
 
-[Link to the related issue (if applicable).]
+## Test Coverage
+- [ ] New tests have been added to cover the changes.
+- [ ] Existing tests have been updated to reflect the modifications.
+- [ ] The project builds successfully on all supported platforms.
 
-**Proposed Changes:**
+## Code Quality
+- [ ] Code adheres to the established coding standards for the project.
+- [ ] Documentation reflects the latest changes and is comprehensive.
 
-[List the changes made in this pull request.]
+## Screenshots or Examples (if applicable)
+Include any visual representations or code snippets that illustrate the changes, especially if they impact the user interface or behavior.
 
-- [Change 1]
-- [Change 2]
-- ...
-
-**Additional Information:**
-
-[Provide any additional context or information that the reviewer should know.]
-
-**Screenshots (if applicable):**
-
-[Insert any relevant screenshots or images showcasing the changes.]
-
-## Checklist
-
-Please make sure the following checks are completed before submitting your pull request:
-
-- [ ] I have read and followed the project's contribution guidelines.
-- [ ] I have tested my changes to ensure they work as expected.
-- [ ] I have provided clear and concise commit messages.
-- [ ] I have updated relevant documentation (if applicable).
-- [ ] I have added or updated unit tests (if applicable).
-- [ ] I have resolved any merge conflicts.
-- [ ] I understand that my pull request will be reviewed and may require further changes.
-
-## Reviewer Guidelines
-
-To the reviewers, please consider the following when reviewing this pull request:
-
-- [ ] Check if the changes align with the project's goals and coding standards.
-- [ ] Verify that the proposed changes are functional and do not introduce regressions.
-- [ ] Ensure the code is well-documented, and updates have been made to any relevant documentation.
-- [ ] Review the code for clarity, maintainability, and best practices.
-- [ ] Approve the pull request if everything looks good, or request changes if necessary.
-
-Thank you for your contribution!
+## Additional Notes
+Share any extra context or information that aids in understanding these changes within the project.
