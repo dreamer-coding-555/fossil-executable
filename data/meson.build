@@ -1,10 +1,10 @@
+fs = import('fs')
 data = [
-    'data.txt',
-    'font.ttf'
+    'data.txt'
 ]
 
-foreach i : data
-    configure_file(input: i, output: i, copy: true)
+foreach iter : data
+    fs.copyfile(iter, '.')
 endforeach
 
 install_data(data)
