@@ -5,7 +5,7 @@
    Author: 
    - Name: Michael Gene Brockus (Dreamer)
    - Email: michaelbrockus@gmail.com
-   - Website: https://trilobite.code.blog
+   - Website: https://trilobite.home.blog
 
    License: This software is released under the Apache License 2.0. Please refer to the LICENSE file for more details.
 
@@ -22,40 +22,21 @@
 #include <trilobite/xassert.h> // extra asserts
 
 //
-// XUNIT-DATA: test data for use in current project test cases
-//
-XTEST_DATA(ProjectTestData) {
-    char *one;
-    char *two;
-}project_data;
-
-//
-// XUNIT-FIXTURE: test fixture for setup/teardown and other tesk
-//
-XTEST_FIXTURE(project_tests);
-XTEST_SETUP(project_tests) {
-    project_data.one = "Something";
-    project_data.two = "Coffe Cup";
-}
-
-XTEST_TEARDOWN(project_tests) {
-    // empty
-}
-
-//
 // XUNIT-CASES: list of test cases testing project features
 //
-XTEST_CASE_FIXTURE(project_tests, basic_run_of_string) {
-    TEST_ASSERT_EQUAL_STRING(project_data.one, project_data.one);
-    TEST_ASSERT_NOT_EQUAL_STRING(project_data.one, project_data.two);
+XTEST_CASE(basic_run_of_string) {
+    cstring one = "Something";
+    cstring two = "Coffe Cup";
+    TEST_ASSERT_EQUAL_STRING(one, one);
+    TEST_ASSERT_NOT_EQUAL_STRING(one, two);
 }
 
-XTEST_CASE_FIXTURE(project_tests, basic_run_of_pointer) {
+XTEST_CASE(basic_run_of_pointer) {
     TEST_ASSERT_NOT_NULL_PTR("Coffee Cup");
     TEST_ASSERT_NULL_PTR(NULL);
 }
 
-XTEST_CASE_FIXTURE(project_tests, basic_run_of_boolean) {
+XTEST_CASE(basic_run_of_boolean) {
     TEST_ASSERT_TRUE(true);
     TEST_ASSERT_FALSE(false);
 }
@@ -63,8 +44,8 @@ XTEST_CASE_FIXTURE(project_tests, basic_run_of_boolean) {
 //
 // XUNIT-GROUP: a group of test cases from the current test file
 //
-void basic_group(XUnitRunner *runner) {
-    XTEST_RUN_FIXTURE(basic_run_of_string,  project_tests, runner);
-    XTEST_RUN_FIXTURE(basic_run_of_pointer, project_tests, runner);
-    XTEST_RUN_FIXTURE(basic_run_of_boolean, project_tests, runner);
+XTEST_GROUP_DEFINE(basic_group) {
+    XTEST_RUN_FIXTURE(basic_run_of_string,  runner);
+    XTEST_RUN_FIXTURE(basic_run_of_pointer, runner);
+    XTEST_RUN_FIXTURE(basic_run_of_boolean, runner);
 } // end of fixture
