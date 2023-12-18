@@ -2,7 +2,8 @@ code = files('app.c')
 
 deps = [
     dependency('tscl-xcore-c'),
-    dependency('tscl-xutil-c')
+    dependency('tscl-xutil-c'),
+    dependency('tscl-xstring-c')
 ]
 
 dir = include_directories('.')
