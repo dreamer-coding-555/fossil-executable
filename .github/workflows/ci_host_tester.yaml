@@ -78,7 +78,7 @@ jobs:
   host_ubuntu:
     strategy:
       matrix:
-        ubuntu_version: ['latest', '22.04', '20.04']
+        ubuntu_version: ['latest', '22.04']
     runs-on: ubuntu-${{ matrix.ubuntu_version }}
     steps:
     - uses: actions/checkout@v4
