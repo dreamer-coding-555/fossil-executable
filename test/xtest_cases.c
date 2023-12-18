@@ -25,8 +25,8 @@
 // XUNIT-CASES: list of test cases testing project features
 //
 XTEST_CASE(basic_run_of_string) {
-    cstring one = "Something";
-    cstring two = "Coffe Cup";
+    char *one = "Something";
+    char *two = "Coffe Cup";
     TEST_ASSERT_EQUAL_STRING(one, one);
     TEST_ASSERT_NOT_EQUAL_STRING(one, two);
 }
