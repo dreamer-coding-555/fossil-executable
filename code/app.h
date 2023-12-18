@@ -40,8 +40,7 @@ extern "C" {
 #endif
 
 #include <trilobite/xcore.h> // core foundation framework
-#include <trilobite/xtype.h> // practical data types
-#include <trilobite/xdata.h> // data structures and algorithms
+#include <trilobite/xutil.h> // core utilites
 
 #include <stdbool.h>
 #include <stdio.h>
