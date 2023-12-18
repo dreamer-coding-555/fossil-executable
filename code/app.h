@@ -39,8 +39,9 @@
 extern "C" {
 #endif
 
-#include <trilobite/xcore.h> // core foundation framework
-#include <trilobite/xutil.h> // core utilites
+#include <trilobite/xcore.h> // core framework
+#include <trilobite/xutil.h> // base utilities
+#include <trilobite/xstring.h> // string library
 
 #include <stdbool.h>
 #include <stdio.h>
