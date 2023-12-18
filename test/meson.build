@@ -1,6 +1,6 @@
 if get_option('with_xunit').enabled()
     test_deps = [
-        dependency('trilo-xtest-c')
+        dependency('tscl-xtest-c')
     ]
 
     test_src = ['xunit_runner.c']
