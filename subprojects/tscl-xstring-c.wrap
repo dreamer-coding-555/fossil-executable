@@ -1,9 +1,0 @@
-# ================ #
-#  TSCL Wrap File. #
-# ================ #
-[wrap-git]
-url = https://github.com/trilobite-stdlib/tscl-xstring-c.git
-revision = main
- 
-[provide]
-tscl-xstring-c = tscl_xstring_c_dep
