@@ -41,7 +41,6 @@ extern "C" {
 
 #include <trilobite/xcore.h> // core framework
 #include <trilobite/xutil.h> // base utilities
-#include <trilobite/xstring.h> // string library
 
 #include <stdbool.h>
 #include <stdio.h>
