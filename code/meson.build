@@ -1,9 +1,8 @@
 code = files('app.c')
 
 deps = [
-    dependency('trilo-xcore-c'),
-    dependency('trilo-xtype-c'),
-    dependency('trilo-xdata-c')
+    dependency('tscl-xcore-c'),
+    dependency('tscl-xutil-c')
 ]
 
 dir = include_directories('.')
