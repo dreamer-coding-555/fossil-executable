@@ -1,0 +1,9 @@
+# ================ #
+#  TSCL Wrap File. #
+# ================ #
+[wrap-git]
+url = https://github.com/trilobite-stdlib/tscl-xutil-c.git
+revision = main
+ 
+[provide]
+tscl-xutil-c = tscl_xutil_c_dep
