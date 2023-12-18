@@ -25,8 +25,7 @@ WORKDIR /app
 COPY . /app
 
 # Set up the build directory and compile the project
-RUN meson setup builddir && \
-    meson compile -C builddir
+RUN meson setup builddir && meson compile -C builddir
 
 # Specify the default command to run when the container starts
 CMD ["./builddir/code/app"]
