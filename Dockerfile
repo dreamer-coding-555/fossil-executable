@@ -13,10 +13,10 @@ RUN apt-get update && \
     && rm -rf /var/lib/apt/lists/*
 
 # Upgrade pip to the latest version
-RUN pip3 install --no-cache-dir --upgrade pip
+RUN pip3 install --upgrade pip
 
 # Install specific versions of Meson and Ninja
-RUN pip3 install --no-cache-dir meson==1.0.0 ninja==1.11.1
+RUN pip3 install meson==1.0.0 ninja==1.11.1
 
 # Set the working directory
 WORKDIR /app
