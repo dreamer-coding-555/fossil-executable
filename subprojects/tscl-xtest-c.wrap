@@ -1,0 +1,9 @@
+# ================ #
+#  TSCL Wrap File. #
+# ================ #
+[wrap-git]
+url = https://github.com/trilobite-stdlib/tscl-xtest-c.git
+revision = main
+ 
+[provide]
+tscl-xtest-c = tscl_xtest_c_dep
