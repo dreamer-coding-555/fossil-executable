@@ -42,18 +42,18 @@ int run_app(int argc, char **argv) {
     cstream io;
 
     // Attempt to open the file "data.txt" in read-only mode
-    if (stream_open(&io, "data.txt", "r") == 0) {
+    if (tscl_stream_open(&io, "data.txt", "r") == 0) {
         char buffer[256];
 
         // Read data from the file into the buffer
-        size_t read_count = stream_read(&io, buffer, sizeof(char), sizeof(buffer) - 1);
+        size_t read_count = tscl_stream_read(&io, buffer, sizeof(char), sizeof(buffer) - 1);
         buffer[read_count] = '\0'; // Null-terminate the string
 
         // Print the content of the file
-        printf("Read from file: %s\n", buffer);
+        tscl_console_out("Read from file: %s\n", buffer);
 
         // Close the file
-        stream_close(&io);
+        tscl_stream_close(&io);
     }
 
     return EXIT_SUCCESS;
