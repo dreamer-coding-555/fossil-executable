@@ -20,6 +20,8 @@
 
 #include <trilobite/xtest.h>   // basic test tools
 #include <trilobite/xassert.h> // extra asserts
+#include <stdlib.h>
+#include <stdbool.h>
 
 //
 // XUNIT-CASES: list of test cases testing project features
