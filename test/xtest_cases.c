@@ -46,8 +46,8 @@ XTEST_CASE(basic_run_of_boolean) {
 //
 // XUNIT-GROUP: a group of test cases from the current test file
 //
-XTEST_GROUP_DEFINE(basic_group) {
-    XTEST_RUN_UNIT(basic_run_of_string,  runner);
-    XTEST_RUN_UNIT(basic_run_of_pointer, runner);
-    XTEST_RUN_UNIT(basic_run_of_boolean, runner);
+XTEST_DEFINE_POOL(basic_group) {
+    XTEST_RUN_UNIT(basic_run_of_string);
+    XTEST_RUN_UNIT(basic_run_of_pointer);
+    XTEST_RUN_UNIT(basic_run_of_boolean);
 } // end of fixture
