@@ -29,13 +29,13 @@
 XTEST_CASE(basic_run_of_string) {
     char *one = "Something";
     char *two = "Coffe Cup";
-    TEST_ASSERT_EQUAL_STRING(one, one);
-    TEST_ASSERT_NOT_EQUAL_STRING(one, two);
+    TEST_ASSERT_EQUAL_CSTRING(one, one);
+    TEST_ASSERT_NOT_EQUAL_CSTRING(one, two);
 }
 
 XTEST_CASE(basic_run_of_pointer) {
-    TEST_ASSERT_NOT_NULL_PTR("Coffee Cup");
-    TEST_ASSERT_NULL_PTR(NULL);
+    TEST_ASSERT_NOT_CNULLPTR("Coffee Cup");
+    TEST_ASSERT_CNULLPTR(NULL);
 }
 
 XTEST_CASE(basic_run_of_boolean) {
