@@ -1,7 +1,7 @@
 deps = [
-    dependency('tscl-xcore-c'),
-    dependency('tscl-xutil-c'),
-    dependency('tscl-xstring-c')
+    dependency('fscl-xcore-c'),
+    dependency('fscl-xutil-c'),
+    dependency('fscl-xstring-c')
 ]
 dir = include_directories('.')
 code = files('app.c')
