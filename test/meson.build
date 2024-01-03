@@ -1,6 +1,6 @@
 if get_option('with_xunit').enabled()
     test_deps = [
-        dependency('tscl-xtest-c')
+        dependency('fscl-xtest-c')
     ]
 
     test_src = ['xunit_runner.c']
