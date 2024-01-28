@@ -1,9 +1,3 @@
-<div style="text-align: center;">
-    <div style="width: 20px; height: 20px; margin: 0 auto; overflow: hidden; border-radius: 50%;">
-        <img src=".github/logo.jpg" alt="Logo" width="100%" height="100%" style="object-fit: cover;">
-    </div>
-</div>
-
 # Project Template Readme
 
 Welcome to the **Project Template** repository! This README provides user-friendly instructions for setting up, compiling, testing, and running a project using the Meson build system on Windows, macOS, and Linux systems. Please note that the Meson build system is required for successfully building this project.
@@ -26,28 +20,28 @@ Before getting started, make sure you have the following installed:
 ## Setting up, Compiling, Installing, and Running the Project
 
 1. **Clone the Repository**:
-   ```bash
+   ```zsh
    git clone https://github.com/dreamer-coding-555/meson-app-c.git
    cd meson-app-c
    ```
 
 2. **Configure the Build**:
-   ```bash
+   ```zsh
    meson setup builddir
    ```
 
 3. **Compile the Project**:
-   ```bash
+   ```zsh
    meson compile -C builddir
    ```
 
 4. **Install the Project**:
-   ```bash
+   ```zsh
    meson install -C builddir
    ```
 
 5. **Run the Project**:
-   ```bash
+   ```zsh
    app
    ```
 
