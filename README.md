@@ -1,3 +1,7 @@
+<div style="text-align: center;">
+    <img src="https://github.com/dreamer-coding-555/meson-app-c/raw/main/.github/logo.jpg" alt="Logo" width="200" style="border-radius: 50%;"/>
+</div>
+
 # Project Template Readme
 
 Welcome to the **Project Template** repository! This README provides user-friendly instructions for setting up, compiling, testing, and running a project using the Meson build system on Windows, macOS, and Linux systems. Please note that the Meson build system is required for successfully building this project.
