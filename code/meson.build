@@ -7,7 +7,7 @@ lib = static_library('code', code,
 
 app_dep = declare_dependency(
     link_with: lib,
-    # dependencies: deps,
+    dependencies: deps,
     include_directories: dir)
 
 executable('app', 'main.c',
