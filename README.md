@@ -1,5 +1,7 @@
 <div style="text-align: center;">
-    <img src="https://github.com/dreamer-coding-555/meson-app-c/raw/main/.github/logo.jpg" alt="Logo" width="200" style="border-radius: 50%;"/>
+    <div style="width: 20px; height: 20px; margin: 0 auto; overflow: hidden; border-radius: 50%;">
+        <img src=".github/logo.jpg" alt="Logo" width="100%" height="100%" style="object-fit: cover;">
+    </div>
 </div>
 
 # Project Template Readme
