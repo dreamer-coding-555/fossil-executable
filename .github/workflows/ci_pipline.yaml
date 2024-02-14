@@ -32,7 +32,7 @@ jobs:
     - uses: actions/checkout@v4
     - name: Setup Python and Tools
       run: |
-          pip install meson==${MESON_VERSION} ninja==${NINJA_VERSION} cython=={CYTHON_VERSION}
+          pip install meson==${MESON_VERSION} ninja==${NINJA_VERSION} cython==${CYTHON_VERSION}
     - name: Setup Build Directory
       run: |
           meson setup ${BUILDDIR_NAME}
@@ -53,7 +53,7 @@ jobs:
     - uses: actions/checkout@v4
     - name: Setup Python and Tools
       run: |
-          pip install meson==${MESON_VERSION} ninja==${NINJA_VERSION} cython=={CYTHON_VERSION}
+          pip install meson==${MESON_VERSION} ninja==${NINJA_VERSION} cython==${CYTHON_VERSION}
     - name: Setup MinGW/MSYS
       if: matrix.mingw != false
       uses: msys2/setup-msys2@v2
@@ -79,7 +79,7 @@ jobs:
     - uses: actions/checkout@v4
     - name: Setup Python and Tools
       run: |
-          pip install meson==${MESON_VERSION} ninja==${NINJA_VERSION} cython=={CYTHON_VERSION}
+          pip install meson==${MESON_VERSION} ninja==${NINJA_VERSION} cython==${CYTHON_VERSION}
           sudo apt-get install -y gcc
     - name: Setup Build Directory
       run: |
