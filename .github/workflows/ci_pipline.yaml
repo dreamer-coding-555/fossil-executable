@@ -16,9 +16,6 @@ on:
 permissions:
   contents: read
 
-env:
-  BUILDDIR_NAME: 'builddir'  # Set your desired build directory version
-
 jobs:
   host_macosx:
     strategy:
@@ -32,13 +29,13 @@ jobs:
           python -m pip install meson==1.0.0 ninja==1.11.1 cython==3.0.8
     - name: Setup Build Directory
       run: |
-          meson setup ${BUILDDIR_NAME}
+          meson setup builddir
     - name: Compile Source Code
       run: |
-          meson compile -C ${BUILDDIR_NAME} -v
+          meson compile -C builddir -v
     - name: Test Project Code
       run: |
-          meson test -C ${BUILDDIR_NAME} -v
+          meson test -C builddir -v
 
   host_windows:
     strategy:
@@ -59,13 +56,13 @@ jobs:
         update: true
     - name: Setup Build Directory
       run: |
-          meson setup ${BUILDDIR_NAME}
+          meson setup builddir
     - name: Compile Source Code
       run: |
-          meson compile -C ${BUILDDIR_NAME} -v
+          meson compile -C builddir -v
     - name: Test Project Code
       run: |
-          meson test -C ${BUILDDIR_NAME} -v
+          meson test -C builddir -v
 
   host_ubuntu:
     strategy:
@@ -80,10 +77,10 @@ jobs:
           sudo apt-get install -y gcc
     - name: Setup Build Directory
       run: |
-          meson setup ${BUILDDIR_NAME}
+          meson setup builddir
     - name: Compile Source Code
       run: |
-          meson compile -C ${BUILDDIR_NAME} -v
+          meson compile -C builddir -v
     - name: Test Project Code
       run: |
-          meson test -C ${BUILDDIR_NAME} -v
+          meson test -C builddir -v
