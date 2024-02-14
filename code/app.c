@@ -12,6 +12,7 @@ Description:
 */
 #include "app.h"
 
+
 // The run_app function is designed to read data from a file named "data.txt"
 // using a custom stream implementation (cstream).
 // Returns EXIT_SUCCESS if the file is read successfully; otherwise, the
