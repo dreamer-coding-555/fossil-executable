@@ -1,4 +1,4 @@
 # - ############## - #
 #   Project Option   #
 # - ############## - #
-option('with_xunit', type : 'feature', value : 'disabled', description : 'Enable Xunit testing for this project')
+option('with_test', type : 'feature', value : 'disabled', description : 'Enable Xunit testing for this project')
