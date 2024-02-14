@@ -41,7 +41,7 @@ jobs:
           meson compile -C ${BUILDDIR_NAME} -v
     - name: Test Project Code
       run: |
-            meson test -C ${BUILDDIR_NAME} -v
+          meson test -C ${BUILDDIR_NAME} -v
 
   host_windows:
     strategy:
@@ -68,7 +68,7 @@ jobs:
           meson compile -C ${BUILDDIR_NAME} -v
     - name: Test Project Code
       run: |
-            meson test -C ${BUILDDIR_NAME} -v
+          meson test -C ${BUILDDIR_NAME} -v
 
   host_ubuntu:
     strategy:
@@ -89,4 +89,4 @@ jobs:
           meson compile -C ${BUILDDIR_NAME} -v
     - name: Test Project Code
       run: |
-            meson test -C ${BUILDDIR_NAME} -v
+          meson test -C ${BUILDDIR_NAME} -v
