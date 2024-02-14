@@ -17,7 +17,7 @@ permissions:
   contents: read
 
 env:
-  MESON_VERSION: '1.3.0'  # Set your desired Meson version
+  MESON_VERSION: '1.3.1'  # Set your desired Meson version
   NINJA_VERSION: '1.11.1'  # Set your desired Ninja version
   CYTHON_VERSION: '3.0.8'  # Set your desired Cython version
   BUILDDIR_NAME: 'builddir'  # Set your desired build directory version
