@@ -1,4 +1,4 @@
-if get_option('with_xunit').enabled()
+if get_option('with_test').enabled()
     test_deps = [
         dependency('fscl-xtest-c')
     ]
