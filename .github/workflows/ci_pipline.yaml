@@ -32,7 +32,7 @@ jobs:
           meson setup builddir
     - name: Compile Source Code
       run: |
-          meson compile -C builddir -v
+          meson compile -C builddir
     - name: Test Project Code
       run: |
           meson test -C builddir -v
@@ -59,7 +59,7 @@ jobs:
           meson setup builddir
     - name: Compile Source Code
       run: |
-          meson compile -C builddir -v
+          meson compile -C builddir
     - name: Test Project Code
       run: |
           meson test -C builddir -v
@@ -80,7 +80,7 @@ jobs:
           meson setup builddir
     - name: Compile Source Code
       run: |
-          meson compile -C builddir -v
+          meson compile -C builddir
     - name: Test Project Code
       run: |
           meson test -C builddir -v
