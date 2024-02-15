@@ -69,7 +69,7 @@ Please check the following before submitting the issue:
 
 ## Contributor Guidelines
 
-Please make sure to follow our [Contributor Guidelines](https://trilobite.code.blog/the-documents/guidelines) when creating issues or contributing to this project.
+Please make sure to follow our [Contributor Guidelines](https://fossillogic.com/the-docs/guidelines) when creating issues or contributing to this project.
 
 Thank you for your contribution!
 
