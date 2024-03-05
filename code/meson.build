@@ -1,16 +1,10 @@
 dir = include_directories('.')
-code = files('app.c')
+ss = import('sourceset').source_set()
 
-lib = static_library('code', code,
-    dependencies: deps,
-    include_directories: dir)
+ss.add(files('app.c'))
 
-app_dep = declare_dependency(
-    link_with: lib,
-    dependencies: deps,
-    include_directories: dir)
-
-executable('app', 'main.c',
-    dependencies: app_dep,
+executable('app',
+    sources: ['main.c', ss.sources()],
     include_directories: dir,
+    dependencies: deps,
     install: true)
