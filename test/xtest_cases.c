@@ -15,7 +15,6 @@ Description:
 #include <fossil/xtest.h>   // basic test tools
 #include <fossil/xassert.h> // extra asserts
 #include <stdlib.h>
-#include <stdbool.h>
 
 //
 // XUNIT-CASES: list of test cases testing project features
@@ -33,8 +32,8 @@ XTEST_CASE(basic_run_of_pointer) {
 }
 
 XTEST_CASE(basic_run_of_boolean) {
-    TEST_ASSERT_TRUE(true);
-    TEST_ASSERT_FALSE(false);
+    TEST_ASSERT_TRUE(APP_ENABLE);
+    TEST_ASSERT_FALSE(APP_DISABLE);
 }
 
 //
