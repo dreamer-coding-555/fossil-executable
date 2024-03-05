@@ -21,6 +21,11 @@ extern "C" {
 #include <fossil/xutil.h> // base utilities
 #include <fossil/xstring.h> // that string lib
 
+enum {
+    APP_ENABLE,
+    APP_DISABLE
+};
+
 #ifdef __cplusplus
 }
 #endif
