@@ -1,10 +1,8 @@
 dir = include_directories('.')
-ss = import('sourceset').source_set()
-
-ss.add(files('app.c'))
+code = files('app.c')
 
 executable('app',
-    sources: ['main.c', ss.sources()],
+    sources: ['main.c', code],
     include_directories: dir,
     dependencies: deps,
     install: true)
