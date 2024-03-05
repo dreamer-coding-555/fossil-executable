@@ -10,7 +10,7 @@ if get_option('with_test').enabled()
         test_src += ['xtest_' + cube + '.c']
     endforeach
 
-    pizza = executable('xcli', test_src, include_directories: dir, dependencies : [test_deps, app_dep])
+    pizza = executable('xcli', [test_src, ss.sources()], include_directories: dir, dependencies : [test_deps, app_dep])
     test('Execute project Xunit tests', pizza)
 
 endif
