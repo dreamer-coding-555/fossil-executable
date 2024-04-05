@@ -13,7 +13,7 @@ Description:
 #include "app.h" // app source code
 
 #include <fossil/xtest.h>   // basic test tools
-#include <fossil/xassert.h> // extra asserts
+#include <fossil/xassume.h> // extra asserts
 #include <stdlib.h>
 
 //
@@ -22,18 +22,18 @@ Description:
 XTEST_CASE(basic_run_of_string) {
     char *one = "Something";
     char *two = "Coffe Cup";
-    TEST_ASSERT_EQUAL_CSTRING(one, one);
-    TEST_ASSERT_NOT_EQUAL_CSTRING(one, two);
+    TEST_ASSUME_EQUAL_CSTRING(one, one);
+    TEST_ASSUME_NOT_EQUAL_CSTRING(one, two);
 }
 
 XTEST_CASE(basic_run_of_pointer) {
-    TEST_ASSERT_NOT_CNULLPTR("Coffee Cup");
-    TEST_ASSERT_CNULLPTR(NULL);
+    TEST_ASSUME_NOT_CNULLPTR("Coffee Cup");
+    TEST_ASSUME_CNULLPTR(cnull);
 }
 
 XTEST_CASE(basic_run_of_boolean) {
-    TEST_ASSERT_TRUE(APP_ENABLE);
-    TEST_ASSERT_FALSE(APP_DISABLE);
+    TEST_ASSUME_TRUE(APP_ENABLE);
+    TEST_ASSUME_FALSE(APP_DISABLE);
 }
 
 //
