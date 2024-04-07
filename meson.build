@@ -5,7 +5,7 @@ project('Fossil App', 'c',
 
 deps = [
     dependency('fscl-xcore-c'),
-    dependency('fscl-xutil-c'),
+    dependency('fscl-xtool-c'),
     dependency('fscl-xstring-c')
 ]
 
