@@ -18,7 +18,7 @@ extern "C" {
 #endif
 
 #include <fossil/xcore.h> // core framework
-//#include <fossil/xutil.h> // base utilities
+#include <fossil/xtool.h> // base utilities
 #include <fossil/xstring.h> // that string lib
 
 enum {
