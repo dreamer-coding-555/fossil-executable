@@ -15,7 +15,7 @@ Description:
 
 // The run_app function is designed to read data from a file named "data.txt"
 // using a custom stream implementation (cstream).
-// Returns EXIT_SUCCESS if the file is read successfully; otherwise, the
+// Returns FSCL_SUCCESS if the file is read successfully; otherwise, the
 // behavior is undefined.
 int run_app(int argc, char **argv) {
     cstream io;
@@ -26,7 +26,7 @@ int run_app(int argc, char **argv) {
 
         // Read data from the file into the buffer
         size_t read_count = fscl_stream_read(&io, buffer, sizeof(char), sizeof(buffer) - 1);
-        buffer[read_count] = '\0'; // Null-terminate the string
+        buffer[read_count] = cterminator; // Null-terminate the string
 
         // Print the content of the file
         fscl_console_out("Read from file: %s\n", buffer);
@@ -35,5 +35,5 @@ int run_app(int argc, char **argv) {
         fscl_stream_close(&io);
     }
 
-    return EXIT_SUCCESS;
+    return FSCL_SUCCESS;
 } // end of func
