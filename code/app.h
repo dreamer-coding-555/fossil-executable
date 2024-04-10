@@ -33,14 +33,13 @@ Description:
  * - argv: Pointer to an array of command-line arguments.
  */
 typedef struct {
-    cstring name;  // Pointer to the name of the application
-    int argc;      // The number of command-line arguments
-    cstrings argv; // Pointer to an array of command-line arguments
+    cstring name;    // Pointer to the name of the application
+    cstring version; // Pointer to the name of the application
+    int argc;        // The number of command-line arguments
+    cstrings argv;   // Pointer to an array of command-line arguments
 } FossilApp;
 
-enum {
-    APP_ENABLE,
-    APP_DISABLE
-};
+const_cstring FOSSIL_APP_NAME    = "My App";
+const_cstring FOSSIL_APP_VERSION = "0.1.0";
 
 #endif
