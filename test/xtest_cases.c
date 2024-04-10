@@ -14,33 +14,23 @@ Description:
 
 #include <fossil/xtest.h>   // basic test tools
 #include <fossil/xassume.h> // extra asserts
-#include <stdlib.h>
 
 //
 // XUNIT-CASES: list of test cases testing project features
 //
-XTEST_CASE(basic_run_of_string) {
-    char *one = "Something";
-    char *two = "Coffe Cup";
-    TEST_ASSUME_EQUAL_CSTRING(one, one);
-    TEST_ASSUME_NOT_EQUAL_CSTRING(one, two);
+
+XTEST_CASE(app_name_case) {
+    TEST_ASSUME_EQUAL_CSTRING(FOSSIL_APP_NAME, "My App");
 }
 
-XTEST_CASE(basic_run_of_pointer) {
-    TEST_ASSUME_NOT_CNULLPTR("Coffee Cup");
-    TEST_ASSUME_CNULLPTR(cnull);
-}
-
-XTEST_CASE(basic_run_of_boolean) {
-    TEST_ASSUME_TRUE(APP_ENABLE);
-    TEST_ASSUME_FALSE(APP_DISABLE);
+XTEST_CASE(app_version_case) {
+    TEST_ASSUME_EQUAL_CSTRING(FOSSIL_APP_VERSION, "0.1.0");
 }
 
 //
 // XUNIT-GROUP: a group of test cases from the current test file
 //
 XTEST_DEFINE_POOL(basic_group) {
-    XTEST_RUN_UNIT(basic_run_of_string);
-    XTEST_RUN_UNIT(basic_run_of_pointer);
-    XTEST_RUN_UNIT(basic_run_of_boolean);
+    XTEST_RUN_UNIT(app_name_case);
+    XTEST_RUN_UNIT(app_version_case);
 } // end of fixture
