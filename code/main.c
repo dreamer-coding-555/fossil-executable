@@ -10,7 +10,7 @@ Description:
     feel free to contact Michael at michaelbrockus@gmail.com.
 ==============================================================================
 */
-extern int run_app(int argc, char **argv);
+extern int fossil_app_entry(char *name, int argc, char **argv);
 
 /*
  > Main Function:
@@ -22,5 +22,5 @@ extern int run_app(int argc, char **argv);
  > @return An integer indicating the application's exit status.
  */
 int main(int argc, char **argv) {
-    return run_app(argc, argv);
+    return fossil_app_entry("Fossil App", argc, argv);
 } // end of func
