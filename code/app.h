@@ -39,7 +39,7 @@ typedef struct {
     cstrings argv;   // Pointer to an array of command-line arguments
 } FossilApp;
 
-const_cstring FOSSIL_APP_NAME    = "My App";
-const_cstring FOSSIL_APP_VERSION = "0.1.0";
+cstring FOSSIL_APP_NAME    = "My App";
+cstring FOSSIL_APP_VERSION = "0.1.0";
 
 #endif
