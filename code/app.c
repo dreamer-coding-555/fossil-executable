@@ -52,7 +52,7 @@ int fossil_app_code(FossilApp *app) {
  * @param argv An array of command-line arguments.
  * @return     The result of the app code execution.
  */
-int fossil_app_entry(char *name, int argc, char **argv) {
+int fossil_app_entry(int argc, char **argv) {
     // Create a new instance of the FossilApp structure
     FossilApp app;
 
@@ -60,7 +60,8 @@ int fossil_app_entry(char *name, int argc, char **argv) {
     fscl_console_puts("Init app entry point");
 
     // Initialize the FossilApp structure with the provided parameters
-    app.name = name;    // Set the app name
+    app.name    = FOSSIL_APP_NAME;    // Set the app name
+    app.version = FOSSIL_APP_VERSION; // Set the app version
     app.argc = argc;    // Set the number of command-line arguments
     app.argv = argv;    // Set the command-line arguments
 
