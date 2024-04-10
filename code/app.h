@@ -10,24 +10,37 @@ Description:
     feel free to contact Michael at michaelbrockus@gmail.com.
 ==============================================================================
 */
-#ifndef APP_H
-#define APP_H
+#ifndef FOSSIL_APP_H
+#define FOSSIL_APP_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+/**
+ * This section of the code includes the necessary header files provided by the Fossil Logic Software Development Kit (SDK).
+ * 
+ * - <fossil/xcore.h>:   Includes the core framework functionalities.
+ * - <fossil/xtool.h>:   Includes base utilities for the application.
+ * - <fossil/xstring.h>: Includes the string library for string manipulations.
+ */
+#include <fossil/xcore.h>    // core framework
+#include <fossil/xtool.h>    // base utilities
+#include <fossil/xstring.h>  // string library
 
-#include <fossil/xcore.h> // core framework
-#include <fossil/xtool.h> // base utilities
-#include <fossil/xstring.h> // that string lib
+/**
+ * FossilApp structure to hold application details.
+ * 
+ * This structure contains the following fields:
+ * - name: Pointer to the name of the application.
+ * - argc: The number of command-line arguments.
+ * - argv: Pointer to an array of command-line arguments.
+ */
+typedef struct {
+    cstring name;  // Pointer to the name of the application
+    int argc;      // The number of command-line arguments
+    cstrings argv; // Pointer to an array of command-line arguments
+} FossilApp;
 
 enum {
     APP_ENABLE,
     APP_DISABLE
 };
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif
