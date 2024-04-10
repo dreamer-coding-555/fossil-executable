@@ -30,7 +30,7 @@ int fossil_app_code(FossilApp *app) {
         size_t read_count = fscl_stream_read(&io, buffer, sizeof(char), sizeof(buffer) - 1);
         
         // Null-terminate the string
-        buffer[read_count] = '\0';
+        buffer[read_count] = cterminator;
 
         // Print the content of the file to the console
         fscl_console_out("Read from file: %s\n", buffer);
