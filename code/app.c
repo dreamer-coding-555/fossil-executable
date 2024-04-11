@@ -12,6 +12,9 @@ Description:
 */
 #include "app.h"
 
+cstring FOSSIL_APP_NAME    = "My App";
+cstring FOSSIL_APP_VERSION = "0.1.0";
+
 /**
  * Main code function for the FossilApp.
  * Opens and reads the "data.txt" file, then prints its content to the console.
