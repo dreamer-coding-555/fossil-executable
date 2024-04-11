@@ -35,7 +35,7 @@ jobs:
           meson compile -C builddir
     - name: Test Project Code
       run: |
-          meson test -C builddir -v
+          meson test -C builddir -v --test-args='--mode devops'
 
   host_windows:
     strategy:
@@ -62,7 +62,7 @@ jobs:
           meson compile -C builddir
     - name: Test Project Code
       run: |
-          meson test -C builddir -v
+          meson test -C builddir -v --test-args='--mode devops'
 
   host_ubuntu:
     strategy:
@@ -83,4 +83,4 @@ jobs:
           meson compile -C builddir
     - name: Test Project Code
       run: |
-          meson test -C builddir -v
+          meson test -C builddir -v --test-args='--mode devops'
