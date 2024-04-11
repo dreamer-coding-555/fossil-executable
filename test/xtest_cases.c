@@ -19,11 +19,11 @@ Description:
 // XUNIT-CASES: list of test cases testing project features
 //
 
-XTEST_CASE(app_name_case) {
+XTEST(app_name_case) {
     TEST_ASSUME_EQUAL_CSTRING(FOSSIL_APP_NAME, "My App");
 }
 
-XTEST_CASE(app_version_case) {
+XTEST(app_version_case) {
     TEST_ASSUME_EQUAL_CSTRING(FOSSIL_APP_VERSION, "0.1.0");
 }
 
