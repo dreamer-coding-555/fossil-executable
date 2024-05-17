@@ -33,11 +33,11 @@ Description:
 // * * * * * * * * * * * * * * * * * * * * * * * *
 
 XTEST(app_name_case) {
-    TEST_ASSUME_EQUAL_CNULLPTR(cnullptr);
+    TEST_ASSUME_CNULLPTR(cnullptr);
 }
 
 XTEST(app_version_case) {
-    TEST_ASSUME_EQUAL_NOT_CNULLPTR("0.1.0");
+    TEST_ASSUME_NOT_CNULLPTR("0.1.0");
 }
 
 // * * * * * * * * * * * * * * * * * * * * * * * *
