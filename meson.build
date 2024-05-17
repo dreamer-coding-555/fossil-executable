@@ -1,5 +1,5 @@
 project('Fossil App', 'c',
-    meson_version: '>=1.0.0',
+    meson_version: '>=1.2.0',
     version: '0.1.0',
     default_options: ['c_std=c2x', 'werror=true', 'buildtype=minsize'])
 
