@@ -12,18 +12,18 @@ Description:
 */
 #include "app.h"
 
-cstring FOSSIL_APP_NAME    = "My App";
-cstring FOSSIL_APP_VERSION = "0.1.0";
-
 /**
- * Main code function for the FossilApp.
- * Opens and reads the "data.txt" file, then prints its content to the console.
+ * Entry point for the FossilApp.
+ * Initializes the FossilApp structure with the provided name, argc, and argv,
+ * then calls the main app code function to start the app.
  *
- * @param app Pointer to the FossilApp structure.
- * @return    FSCL_SUCCESS if the operation succeeds, an error code otherwise.
+ * @param name The name of the application.
+ * @param argc The number of command-line arguments.
+ * @param argv An array of command-line arguments.
+ * @return     The result of the app code execution.
  */
-int fossil_app_code(FossilApp *app) {
-    cstream io;  // Declare a cstream structure for file I/O
+int fossil_app_main(int argc, char **argv) {
+        cstream io;  // Declare a cstream structure for file I/O
 
     // Attempt to open the file "data.txt" in read-only mode
     if (fscl_stream_open(&io, "data.txt", "r") == 0) {
@@ -36,38 +36,10 @@ int fossil_app_code(FossilApp *app) {
         buffer[read_count] = cterminator;
 
         // Print the content of the file to the console
-        fscl_console_out("Read from file: %s\n", buffer);
+        fscl_console_out("Read from file: f{str}\n", buffer);
 
         // Close the file
         fscl_stream_close(&io);
     }
-
-    return FSCL_SUCCESS;  // Return success code
-} // end of func
-
-/**
- * Entry point for the FossilApp.
- * Initializes the FossilApp structure with the provided name, argc, and argv,
- * then calls the main app code function to start the app.
- *
- * @param name The name of the application.
- * @param argc The number of command-line arguments.
- * @param argv An array of command-line arguments.
- * @return     The result of the app code execution.
- */
-int fossil_app_entry(int argc, char **argv) {
-    // Create a new instance of the FossilApp structure
-    FossilApp app;
-
-    // Print a message to the console indicating the app entry point initialization
-    fscl_console_puts("Init app entry point");
-
-    // Initialize the FossilApp structure with the provided parameters
-    app.name    = FOSSIL_APP_NAME;    // Set the app name
-    app.version = FOSSIL_APP_VERSION; // Set the app version
-    app.argc = argc;    // Set the number of command-line arguments
-    app.argv = argv;    // Set the command-line arguments
-
-    // Call the main app code function with the initialized FossilApp structure
-    return fossil_app_code(&app);
+    return FSCL_SUCCESS;
 } // end of func
