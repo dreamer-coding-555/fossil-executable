@@ -24,22 +24,4 @@ Description:
 #include <fossil/xtool.h>    // base utilities
 #include <fossil/xstring.h>  // string library
 
-/**
- * FossilApp structure to hold application details.
- * 
- * This structure contains the following fields:
- * - name: Pointer to the name of the application.
- * - argc: The number of command-line arguments.
- * - argv: Pointer to an array of command-line arguments.
- */
-typedef struct {
-    cstring name;    // Pointer to the name of the application
-    cstring version; // Pointer to the name of the application
-    int argc;        // The number of command-line arguments
-    cstrings argv;   // Pointer to an array of command-line arguments
-} FossilApp;
-
-extern cstring FOSSIL_APP_NAME;
-extern cstring FOSSIL_APP_VERSION;
-
 #endif
