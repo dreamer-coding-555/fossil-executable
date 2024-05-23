@@ -7,11 +7,16 @@ on:
   pull_request:
     branches:
       - '*'
+  schedule:
+    - cron: '0 0 * * *' # Runs every day at midnight UTC
 
 jobs:
   security_check:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     name: Security Check
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -26,8 +31,11 @@ jobs:
         run: python .github/tools/sanity-secure.py
 
   subprojects_check:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     name: Subprojects Check
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -42,8 +50,11 @@ jobs:
         run: python .github/tools/sanity-wraps.py
 
   sourcecode_check:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     name: Source Code Check
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
