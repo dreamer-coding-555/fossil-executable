@@ -19,9 +19,9 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Install Meson and Ninja
+      - name: Install Meson, Ninja, and requests
         run: |
-          python -m pip install meson ninja
+          python -m pip install meson ninja requests
       - name: Check Security
         run: python .github/tools/sanity-secure.py
 
@@ -35,9 +35,9 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Install Meson and Ninja
+      - name: Install Meson, Ninja, and requests
         run: |
-          python -m pip install meson ninja
+          python -m pip install meson ninja requests
       - name: Check Subprojects
         run: python .github/tools/sanity-wraps.py
 
@@ -51,8 +51,8 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Install Meson and Ninja
+      - name: Install Meson, Ninja, and requests
         run: |
-          python -m pip install meson ninja
+          python -m pip install meson ninja requests
       - name: Check Format
         run: python .github/tools/sanity-format.py
