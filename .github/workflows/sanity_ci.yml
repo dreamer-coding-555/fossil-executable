@@ -1,0 +1,41 @@
+name: Sanity Check
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+    branches:
+      - '*'
+
+jobs:
+  security_lint:
+    runs-on: ubuntu-latest
+    name: Security Check
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Check Security
+      run: python .github/tools/sanity-secure.py
+
+  unittests_lint:
+    runs-on: ubuntu-latest
+    name: Unit Tests Linter
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Check Subprojects
+      run: python .github/tools/sanity-wraps.py
+
+  directory_lint:
+    runs-on: ubuntu-latest
+    name: Directory Linter
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Check Source
+      run: python .github/tools/sanity-format.py
