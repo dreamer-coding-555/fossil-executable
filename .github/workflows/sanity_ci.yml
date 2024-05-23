@@ -1,41 +1,58 @@
-name: Sanity Check
+name: Sanity Checks
 
 on:
   push:
     branches:
       - main
-      - master
   pull_request:
     branches:
       - '*'
 
 jobs:
-  security_lint:
+  security_check:
     runs-on: ubuntu-latest
     name: Security Check
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install Meson and Ninja
+        run: |
+          python -m pip install meson ninja
+      - name: Check Security
+        run: python .github/tools/sanity-secure.py
 
-    - name: Check Security
-      run: python .github/tools/sanity-secure.py
-
-  unittests_lint:
+  subprojects_check:
     runs-on: ubuntu-latest
-    name: Unit Tests Linter
+    name: Subprojects Check
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install Meson and Ninja
+        run: |
+          python -m pip install meson ninja
+      - name: Check Subprojects
+        run: python .github/tools/sanity-wraps.py
 
-    - name: Check Subprojects
-      run: python .github/tools/sanity-wraps.py
-
-  directory_lint:
+  sourcecode_check:
     runs-on: ubuntu-latest
-    name: Directory Linter
+    name: Source Code Check
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Check Source
-      run: python .github/tools/sanity-format.py
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install Meson and Ninja
+        run: |
+          python -m pip install meson ninja
+      - name: Check Format
+        run: python .github/tools/sanity-format.py
