@@ -1,62 +1,50 @@
 #!/usr/bin/env python3
 
 import os
-import sys
 import re
-from queue import Queue
+import sys
 import threading
+import json
+from queue import Queue
 
-# Configuration for format checks
-config = {
-    'indentation': 4,  # Number of spaces for indentation
-    'max_line_length': 80,  # Maximum allowed line length
-}
-
-# Define patterns for format checks
+# Define patterns to search for common security issues
 patterns = {
-    'trailing_whitespace': re.compile(r'[ \t]+$'),
-    'multiple_blank_lines': re.compile(r'\n{3,}'),
-    'missing_newline_at_eof': re.compile(r'[^\n]\Z'),
+    'unsafe_functions': re.compile(r'\b(strcpy|strcat|sprintf|gets|scanf|sscanf|vfscanf|vscanf|vsscanf)\b'),
+    'buffer_overflow': re.compile(r'\b(memcpy|memmove|memset)\b.*?\[(?!sizeof)'),
+    'uninitialized_var': re.compile(r'\b([a-zA-Z_][a-zA-Z0-9_]*)\s*=\s*[^;]*;\s*(if\s*\(\1\s*==\s*[^)]*\)|while\s*\(\1\s*==\s*[^)]*\))'),
+    'command_injection': re.compile(r'\b(system|exec|popen)\b'),
+    'unprotected_format_string': re.compile(r'printf\s*\([^"]')
 }
 
-class FormatChecker:
-    def __init__(self, directory):
+class CodeScanner:
+    def __init__(self, directory, output_format='text'):
         self.directory = directory
+        self.output_format = output_format
+        self.summary = {
+            'unsafe_functions': 0,
+            'buffer_overflow': 0,
+            'uninitialized_var': 0,
+            'command_injection': 0,
+            'unprotected_format_string': 0
+        }
+        self.issues = []
         self.queue = Queue()
         self.lock = threading.Lock()
-        self.issues = []
-        self.file_extensions = ['.c', '.cpp', '.h', '.hpp', '.m', '.mm', '.cu']  # File extensions to check
-
+    
     def check_file(self, filepath):
         file_issues = []
-        with open(filepath, 'r', errors='ignore') as file:
-            lines = file.readlines()
-
-            # Check for trailing whitespace
-            for i, line in enumerate(lines):
-                if patterns['trailing_whitespace'].search(line):
-                    file_issues.append((i + 1, 'Trailing whitespace'))
-
-            # Check for indentation
-            for i, line in enumerate(lines):
-                stripped_line = line.lstrip()
-                if stripped_line and len(line) - len(stripped_line) % config['indentation'] != 0:
-                    file_issues.append((i + 1, 'Incorrect indentation'))
-
-            # Check for line length
-            for i, line in enumerate(lines):
-                if len(line) > config['max_line_length']:
-                    file_issues.append((i + 1, f'Line exceeds {config["max_line_length"]} characters'))
-
-            # Check for multiple blank lines
-            content = ''.join(lines)
-            if patterns['multiple_blank_lines'].search(content):
-                file_issues.append((None, 'Multiple consecutive blank lines'))
-
-            # Check for missing newline at EOF
-            if not content.endswith('\n'):
-                file_issues.append((len(lines), 'Missing newline at end of file'))
-
+        try:
+            with open(filepath, 'r', errors='ignore') as file:
+                content = file.readlines()
+                for i, line in enumerate(content):
+                    for issue_type, pattern in patterns.items():
+                        matches = pattern.findall(line)
+                        if matches:
+                            with self.lock:
+                                self.summary[issue_type] += len(matches)
+                            file_issues.append((issue_type, i + 1, line.strip(), matches))
+        except Exception as e:
+            print(f"Error reading file {filepath}: {e}")
         return file_issues
 
     def worker(self):
@@ -73,7 +61,7 @@ class FormatChecker:
     def scan_directory(self):
         for root, _, files in os.walk(self.directory):
             for file in files:
-                if any(file.endswith(ext) for ext in self.file_extensions):
+                if file.endswith(('.c', '.cpp', '.m', '.mm', '.cu')):
                     self.queue.put(os.path.join(root, file))
 
         threads = []
@@ -90,31 +78,41 @@ class FormatChecker:
             t.join()
 
     def output_results(self):
-        if not self.issues:
-            print("No formatting issues found.")
+        if self.output_format == 'json':
+            result = {
+                'summary': self.summary,
+                'issues': [{
+                    'file': filepath,
+                    'issues': [{'type': issue[0], 'line': issue[1], 'code': issue[2], 'matches': issue[3]} for issue in issues]
+                } for filepath, issues in self.issues]
+            }
+            print(json.dumps(result, indent=2))
         else:
             for filepath, issues in self.issues:
                 print(f"Issues found in {filepath}:")
-                for line_num, issue in issues:
-                    if line_num:
-                        print(f"  Line {line_num}: {issue}")
-                    else:
-                        print(f"  {issue}")
-            print("\nSummary of files checked:", len(self.issues))
+                for issue_type, line_num, code, matches in issues:
+                    print(f"  Line {line_num}: {issue_type} - {code} (matches: {matches})")
+            print("\nSummary of issues found:")
+            for issue_type, count in self.summary.items():
+                print(f"  {issue_type}: {count} occurrences")
 
 def main():
-    if len(sys.argv) < 2:
-        directory = os.getcwd()
-    else:
+    default_directory = os.path.dirname(os.path.realpath(__file__))
+    
+    if len(sys.argv) > 1 and sys.argv[1] not in ('--json', '-j'):
         directory = sys.argv[1]
+    else:
+        directory = default_directory
+
+    output_format = 'json' if any(arg in sys.argv for arg in ('--json', '-j')) else 'text'
 
     if not os.path.isdir(directory):
         print(f"Error: {directory} is not a valid directory.")
         sys.exit(1)
-
-    checker = FormatChecker(directory)
-    checker.scan_directory()
-    checker.output_results()
+    
+    scanner = CodeScanner(directory, output_format)
+    scanner.scan_directory()
+    scanner.output_results()
 
 if __name__ == "__main__":
     main()
