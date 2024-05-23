@@ -120,8 +120,29 @@ def perform_sanity_check(directory):
 
     return issues_found
 
+def check_build_files(directory):
+    """Ensure only Meson build files are present and no CMake, automake, SCONS, Make, BAZEL files are found."""
+    prohibited_files = ['CMakeLists.txt', 'Makefile', 'SConstruct', 'BUILD']
+    meson_files = ['meson.build', 'meson_options.txt']
+
+    for root, _, files in os.walk(directory):
+        for file in files:
+            if file in prohibited_files:
+                print(f"Prohibited build file found: {os.path.join(root, file)}")
+                return True
+            if file in meson_files:
+                print(f"Meson build file found: {os.path.join(root, file)}")
+
+    return False
+
 def main():
     subprojects_dir = "subprojects"
+    root_dir = os.getcwd()
+
+    # Ensure only Meson build files are present
+    if check_build_files(root_dir):
+        print("Prohibited build files found.")
+        sys.exit(1)
 
     if not os.path.exists(subprojects_dir):
         print(f"{subprojects_dir} directory does not exist.")
