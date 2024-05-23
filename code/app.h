@@ -23,5 +23,5 @@ Description:
 #include <fossil/xcore.h>    // core framework
 #include <fossil/xtool.h>    // base utilities
 #include <fossil/xstring.h>  // string library
-#include <stdatomic.h>
+
 #endif
