@@ -15,7 +15,7 @@ jobs:
     name: Security Check
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
     - name: Check Security
       run: python .github/tools/sanity-secure.py
@@ -25,7 +25,7 @@ jobs:
     name: Unit Tests Linter
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
     - name: Check Subprojects
       run: python .github/tools/sanity-wraps.py
@@ -35,7 +35,7 @@ jobs:
     name: Directory Linter
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
     - name: Check Source
       run: python .github/tools/sanity-format.py
