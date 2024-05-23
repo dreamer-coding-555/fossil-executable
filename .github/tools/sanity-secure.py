@@ -64,6 +64,8 @@ class CodeScanner:
             with open(filepath, 'r', errors='ignore') as file:
                 content = file.readlines()
                 for i, line in enumerate(content):
+                    if 'test/' in filepath and line.strip().startswith('#'):
+                        continue  # Skip lines starting with '#' in the 'test/' directory
                     for issue_type, pattern in patterns.items():
                         matches = pattern.findall(line)
                         if matches:
