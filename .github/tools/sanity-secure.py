@@ -5,6 +5,7 @@ import re
 import sys
 import threading
 import json
+import subprocess
 from queue import Queue
 
 # Define patterns to search for common security issues
@@ -15,6 +16,32 @@ patterns = {
     'command_injection': re.compile(r'\b(system|exec|popen)\b'),
     'unprotected_format_string': re.compile(r'printf\s*\([^"]')
 }
+
+# Define file patterns that are not allowed
+disallowed_build_files = [
+    re.compile(r'cmake.*', re.IGNORECASE),
+    re.compile(r'build.*\.cmake', re.IGNORECASE),
+    re.compile(r'CMakeLists\.txt', re.IGNORECASE),
+    re.compile(r'.*\.am$', re.IGNORECASE),
+    re.compile(r'configure', re.IGNORECASE),
+    re.compile(r'configure\.ac', re.IGNORECASE),
+    re.compile(r'configure\.in', re.IGNORECASE),
+    re.compile(r'makefile', re.IGNORECASE),
+    re.compile(r'makefile\..*', re.IGNORECASE),
+    re.compile(r'.*\.mk$', re.IGNORECASE),
+    re.compile(r'build\.scons', re.IGNORECASE),
+    re.compile(r'sconstruct', re.IGNORECASE),
+    re.compile(r'sconscript', re.IGNORECASE),
+    re.compile(r'build\.bazel', re.IGNORECASE),
+    re.compile(r'WORKSPACE', re.IGNORECASE),
+]
+
+# Define Meson build files
+meson_build_files = [
+    'meson.build',
+    'meson.options',
+    'meson_options.txt'
+]
 
 class CodeScanner:
     def __init__(self, directory, output_format='text'):
@@ -96,6 +123,36 @@ class CodeScanner:
             for issue_type, count in self.summary.items():
                 print(f"  {issue_type}: {count} occurrences")
 
+def check_meson_exclusivity(directory):
+    """Check for presence of Meson build files and absence of other build system files."""
+    meson_files_found = False
+    other_build_files_found = False
+
+    for root, _, files in os.walk(directory):
+        for file in files:
+            if file in meson_build_files:
+                meson_files_found = True
+            for pattern in disallowed_build_files:
+                if pattern.match(file):
+                    print(f"Disallowed build file found: {os.path.join(root, file)}")
+                    other_build_files_found = True
+
+    if not meson_files_found:
+        print("No Meson build files found. Ensure that meson.build, meson.options, or meson_options.txt are present.")
+        sys.exit(1)
+    
+    if other_build_files_found:
+        sys.exit(1)
+
+def run_meson_subprojects_download(directory):
+    """Run the Meson subprojects download command."""
+    try:
+        subprocess.run(['meson', 'subprojects', 'download'], check=True, cwd=directory)
+        print("Meson subprojects download completed successfully.")
+    except subprocess.CalledProcessError as e:
+        print(f"Error running meson subprojects download: {e}")
+        sys.exit(1)
+
 def main():
     if len(sys.argv) < 2:
         directory = os.getcwd()
@@ -108,9 +165,22 @@ def main():
         print(f"Error: {directory} is not a valid directory.")
         sys.exit(1)
     
+    subprojects_dir = os.path.join(directory, 'subprojects')
+    if not os.path.exists(subprojects_dir):
+        print(f"{subprojects_dir} directory does not exist.")
+        sys.exit(1)
+
+    check_meson_exclusivity(directory)
+    run_meson_subprojects_download(directory)
+
     scanner = CodeScanner(directory, output_format)
     scanner.scan_directory()
     scanner.output_results()
+
+    if any(value > 0 for value in scanner.summary.values()):
+        sys.exit(1)
+    else:
+        sys.exit(0)
 
 if __name__ == "__main__":
     main()
