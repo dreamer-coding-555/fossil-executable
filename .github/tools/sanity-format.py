@@ -7,13 +7,13 @@ import threading
 import json
 from queue import Queue
 
-# Define patterns to search for common security issues
+# Define refined patterns to search for common security issues
 patterns = {
-    'unsafe_functions': re.compile(r'\b(strcpy|strcat|sprintf|gets|scanf|sscanf|vfscanf|vscanf|vsscanf)\b'),
-    'buffer_overflow': re.compile(r'\b(memcpy|memmove|memset)\b.*?\[(?!sizeof)'),
+    'unsafe_functions': re.compile(r'\b(strcpy_s?|strcat_s?|sprintf_s?|gets|scanf_s?|sscanf_s?|vfscanf_s?|vscanf_s?|vsscanf_s?)\b'),
+    'buffer_overflow': re.compile(r'\b(memcpy_s?|memmove_s?|memset_s?)\b.*?\[(?!sizeof)'),
     'uninitialized_var': re.compile(r'\b([a-zA-Z_][a-zA-Z0-9_]*)\s*=\s*[^;]*;\s*(if\s*\(\1\s*==\s*[^)]*\)|while\s*\(\1\s*==\s*[^)]*\))'),
-    'command_injection': re.compile(r'\b(system|exec|popen)\b'),
-    'unprotected_format_string': re.compile(r'printf\s*\([^"]')
+    'command_injection': re.compile(r'\b(system|exec|popen)\b|\b(os.system|os.popen|subprocess.call|subprocess.Popen|subprocess.run)\b'),
+    'unprotected_format_string': re.compile(r'(?:^|(?<=[^%]))printf\s*\([^"]')
 }
 
 class CodeScanner:
