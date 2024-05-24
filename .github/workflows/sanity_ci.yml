@@ -29,3 +29,5 @@ jobs:
           python -m pip install meson ninja requests
       - name: Check Format
         run: python .github/tools/sanity-format.py
+      - name: Check Wraps
+        run: python .github/tools/sanity-wraps.py
