@@ -34,12 +34,13 @@ jobs:
           python-version: '3.12'
 
       - name: Install Meson and Ninja on Linux and MacOS
+        if: runner.os != 'Windows'
         run: |
           python -m pip install --upgrade pip
           python -m pip install meson==${{ matrix.meson_version }} ninja
 
       - name: Configure
-        run: meson setup builddir -Dwith_test=enabled
+        run: meson setup builddir -Dwith_test=enabled --fatal-meson-warnings -Db_ndebug=true -Dwerror=true
 
       - name: Compile
         run: meson compile -C builddir
@@ -55,8 +56,11 @@ jobs:
           path: builddir/meson-logs/testlog.txt
 
   build_msvc:
-    name: Running on Windows with MSVC
+    name: Running Microsoft Visual Compiler
     runs-on: windows-latest
+    strategy:
+      matrix:
+        msvc_version: ["2019", "2022"]
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -70,20 +74,20 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           python -m pip install meson ninja
-          choco install visualstudio2019buildtools --package-parameters "--add Microsoft.VisualStudio.Workload.VCTools --includeRecommended --includeOptional --passive"
+          choco install visualstudio${{ matrix.msvc_version }}buildtools --package-parameters "--add Microsoft.VisualStudio.Workload.VCTools --includeRecommended --includeOptional --passive"
 
       - name: Configure
-        run: meson setup builddir_msvc -Dwith_test=enabled
+        run: meson setup builddir_msvc_${{ matrix.msvc_version }} -Dwith_test=enabled --fatal-meson-warnings -Db_ndebug=true -Dwerror=true
 
       - name: Compile
-        run: meson compile -C builddir_msvc
+        run: meson compile -C builddir_msvc_${{ matrix.msvc_version }}
 
       - name: Run Tests
-        run: meson test -C builddir_msvc -v --test-args='--mode devops'
+        run: meson test -C builddir_msvc_${{ matrix.msvc_version }} -v --test-args='--mode devops'
 
       - name: Upload Test Log
         uses: actions/upload-artifact@v4
         if: failure()
         with:
-          name: windows_msvc_meson_testlog
-          path: builddir_msvc/meson-logs/testlog.txt
+          name: windows_msvc_${{ matrix.msvc_version }}_meson_testlog
+          path: builddir_msvc_${{ matrix.msvc_version }}/meson-logs/testlog.txt
