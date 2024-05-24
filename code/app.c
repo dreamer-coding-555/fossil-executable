@@ -23,7 +23,7 @@ Description:
  * @return     The result of the app code execution.
  */
 int fossil_app_main(int argc, char **argv) {
-        cstream io;  // Declare a cstream structure for file I/O
+    cstream io;  // Declare a cstream structure for file I/O
 
     // Attempt to open the file "data.txt" in read-only mode
     if (fscl_stream_open(&io, "data.txt", "r") == 0) {
