@@ -13,5 +13,4 @@ if get_option('with_test').enabled()
 
     pizza = executable('xcli', [test_src, code], include_directories: dir, dependencies : [test_deps, deps])
     test('Execute project Xunit tests', pizza)
-
 endif
