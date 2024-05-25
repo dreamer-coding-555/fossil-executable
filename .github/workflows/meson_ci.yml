@@ -112,6 +112,38 @@ jobs:
           name: ${{ github.event.repository.name }}-${{ runner.os }}-${{ matrix.meson_version }}
           path: builddir/meson-dist/*.tar.*
 
+  build_posix:
+    # if: github.event.pull_request.head.repo.full_name == 'fossil-lib/${{ github.event.repository.name }}'
+    name: Building Docker Images for Mocking Linux Distros
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        distro: [ubuntu:latest, debian:latest, centos:latest, fedora:latest, alpine:latest, opensuse:latest, archlinux:latest]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+  
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+  
+      - name: Build Docker image
+        run: docker buildx build --tag fossil-lib/${{ github.event.repository.name }}-${{ matrix.distro }}:latest --file Dockerfile-${{ matrix.distro }} --progress plain .
+  
+      - name: Run Meson build inside Docker container
+        run: |
+          docker run --rm -v $(pwd):/proj -w /proj fossil-lib/${{ github.event.repository.name }}-${{ matrix.distro }}:latest meson setup builddir_${{ matrix.distro }} --fatal-meson-warnings -Dwerror=true -Dwith_test=enabled
+          docker run --rm -v $(pwd):/proj -w /proj fossil-lib/${{ github.event.repository.name }}-${{ matrix.distro }}:latest meson compile -C builddir_${{ matrix.distro }}
+          docker run --rm -v $(pwd):/proj -w /proj fossil-lib/${{ github.event.repository.name }}-${{ matrix.distro }}:latest meson test -C builddir_${{ matrix.distro }} -v --test-args='--mode devops'
+  
+      - name: Upload Test Log
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${matrix.distro}_meson_testlog
+          path: builddir_${{ matrix.distro }}/meson-logs/testlog.txt
+
   build_msvc:
     # if: github.event.pull_request.head.repo.full_name == 'fossil-lib/${{ github.event.repository.name }}'
     name: Running on Windows with MSVC
