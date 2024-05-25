@@ -149,25 +149,25 @@ jobs:
         run: meson setup builddir_msvc_${{ matrix.msvc_version }} --fatal-meson-warnings -Dwerror=true -Dwith_test=enabled
 
       - name: Compile
-        run: meson compile -C builddir_msvc_${{ matrix.msvc_version }}
+        run: meson compile -C builddir_msvc_${{ matrix.msvc_version }}-${{ matrix.meson_version }}
 
       - name: Run Tests
-        run: meson test -C builddir_msvc_${{ matrix.msvc_version }} -v --test-args='--mode devops'
+        run: meson test -C builddir_msvc_${{ matrix.msvc_version }}-${{ matrix.meson_version }} -v --test-args='--mode devops'
 
       - name: Upload Test Log
         if: failure()
         uses: actions/upload-artifact@v4
         with:
           name: windows_msvc_${{ matrix.msvc_version }}_meson_testlog
-          path: builddir_msvc_${{ matrix.msvc_version }}/meson-logs/testlog.txt
+          path: builddir_msvc_${{ matrix.msvc_version }}-${{ matrix.meson_version }}/meson-logs/testlog.txt
 
       - name: Create Distribution Package
         if: success()
-        run: meson dist -C builddir_msvc_${{ matrix.msvc_version }}
+        run: meson dist -C builddir_msvc_${{ matrix.msvc_version }}-${{ matrix.meson_version }}
 
       - name: Archive Distribution Package
         if: success()
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ github.event.repository.name }}-windows-${{ matrix.msvc_version }}
-          path: builddir_msvc_${{ matrix.msvc_version }}/meson-dist/*.tar.*
+          name: ${{ github.event.repository.name }}-msvc-${{ matrix.msvc_version }}-${{ matrix.meson_version }}
+          path: builddir_msvc_${{ matrix.msvc_version }}-${{ matrix.meson_version }}/meson-dist/*.tar.*
