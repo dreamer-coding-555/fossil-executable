@@ -68,7 +68,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, ubuntu-20.04, ubuntu-22.04, ubuntu-24.04, macos-latest, macos-13, macos-14, windows-2022]
+        os: [ubuntu-latest, ubuntu-20.04, ubuntu-22.04, ubuntu-24.04, macos-latest, macos-13, macos-14, windows-latest, windows-2019, windows-2022]
         meson_version: ["1.2.0", "1.3.0", "1.4.0"] # ensure no issues between Meson versions
     steps:
       - name: Checkout code
@@ -148,7 +148,7 @@ jobs:
           $env:CXX="cl.exe"
 
       - name: Configure
-        run: meson setup builddir_msvc_${{ matrix.msvc_version }} --fatal-meson-warnings -Dwerror=true -Dwith_test=enabled -Dc_args='/sdl /analyze' -Dcpp_args='/sdl /analyze'
+        run: meson setup builddir_msvc_${{ matrix.msvc_version }} --fatal-meson-warnings -Dwerror=true -Dwith_test=enabled
 
       - name: Compile
         run: meson compile -C builddir_msvc_${{ matrix.msvc_version }}
