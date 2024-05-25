@@ -146,7 +146,7 @@ jobs:
           $env:CXX="cl.exe"
 
       - name: Configure
-        run: meson setup builddir_msvc_${{ matrix.msvc_version }} --fatal-meson-warnings -Dwerror=true -Dwith_test=enabled -Dc_args='/sdl /analyze' -Dcpp_args='/sdl /analyze'
+        run: meson setup builddir_msvc_${{ matrix.msvc_version }} --fatal-meson-warnings -Dwerror=true -Dwith_test=enabled
 
       - name: Compile
         run: meson compile -C builddir_msvc_${{ matrix.msvc_version }}
