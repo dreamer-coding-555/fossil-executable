@@ -12,7 +12,6 @@ Description:
 */
 #include "app.h"
 
-
 /**
  * Entry point for the FossilApp.
  * Initializes the FossilApp structure with the provided name, argc, and argv,
