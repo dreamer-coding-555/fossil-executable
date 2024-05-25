@@ -9,7 +9,6 @@ deps = [
     dependency('fscl-xstring-c')
 ]
 
-
 subdir('data')
 subdir('code')
 subdir('test')
