@@ -15,7 +15,6 @@ Description:
 #include <fossil/xtest.h>   // basic test tools
 #include <fossil/xassume.h> // extra asserts
 
-
 // * * * * * * * * * * * * * * * * * * * * * * * *
 // * Fossil Logic Test Utilites
 // * * * * * * * * * * * * * * * * * * * * * * * *
