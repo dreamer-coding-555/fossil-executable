@@ -59,7 +59,7 @@ jobs:
         if: success()
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ github.repository }}-${{ runner.os }}-${{ matrix.meson_version }}
+          name: ${{ github.event.repository.name }}-${{ runner.os }}-${{ matrix.meson_version }}
           path: builddir/meson-dist/*.tar.*
 
   build_hosts:
@@ -108,7 +108,7 @@ jobs:
         if: success()
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ github.repository }}-${{ runner.os }}-${{ matrix.meson_version }}
+          name: ${{ github.event.repository.name }}-${{ runner.os }}-${{ matrix.meson_version }}
           path: builddir/meson-dist/*.tar.*
 
   build_msvc:
@@ -169,5 +169,5 @@ jobs:
         if: success()
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ github.repository }}-windows-${{ matrix.msvc_version }}
+          name: ${{ github.event.repository.name }}-windows-${{ matrix.msvc_version }}
           path: builddir_msvc_${{ matrix.msvc_version }}/meson-dist/*.tar.*
