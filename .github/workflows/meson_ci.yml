@@ -194,14 +194,3 @@ jobs:
         with:
           name: windows_msvc_${{ matrix.msvc_version }}_meson_testlog
           path: builddir_msvc_${{ matrix.msvc_version }}/meson-logs/testlog.txt
-
-      - name: Create Distribution Package
-        if: success()
-        run: meson dist -C builddir_msvc_${{ matrix.msvc_version }}
-
-      - name: Archive Distribution Package
-        if: success()
-        uses: actions/upload-artifact@v4
-        with:
-          name: fossil-lib/${{ github.event.repository.name }}-windows-${{ matrix.msvc_version }}
-          path: builddir_msvc_${{ matrix.msvc_version }}/meson-dist/*.tar.*
