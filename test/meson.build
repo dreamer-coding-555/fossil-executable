@@ -1,7 +1,4 @@
 if get_option('with_test').enabled()
-    test_deps = [
-        dependency('fscl-xtest-c')
-    ]
     run_command(['python3', 'generate-runner.py'], check: true)
 
     test_src = ['xunit_runner.c']
@@ -11,6 +8,9 @@ if get_option('with_test').enabled()
         test_src += ['xtest_' + cube + '.c']
     endforeach
 
-    pizza = executable('xcli', [test_src, code], include_directories: dir, dependencies : [test_deps, deps])
-    test('Execute project Xunit tests', pizza)
+    pizza = executable('runner',
+        [test_src, code],
+        include_directories: dir,
+        dependencies : [dependency('fossil-test'), deps])
+    test('Execute project Fossil tests', pizza)
 endif
