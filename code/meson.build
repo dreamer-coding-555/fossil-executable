@@ -1,3 +1,7 @@
+deps = [
+    dependency('fossil-sdk')
+]
+
 dir = include_directories('.')
 code = files('app.c')
 
