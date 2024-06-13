@@ -7,11 +7,11 @@ class TestRunnerGenerator:
 
     def find_test_groups(self, extension):
         test_groups = set()
-        pattern = r'XTEST_DEFINE_POOL\((\w+)\)'
+        pattern = r'FOSSIL_TEST_GROUP\((\w+)\)'
 
         for root, _, files in os.walk(self.directory):
             for file in files:
-                if file.startswith('xtest_') and file.endswith('.' + extension):
+                if file.startswith('unittest_') and file.endswith('.' + extension):
                     with open(os.path.join(root, file), 'r') as f:
                         content = f.read()
                         matches = re.findall(pattern, content)
@@ -21,67 +21,62 @@ class TestRunnerGenerator:
 
     def generate_test_runner(self, test_groups, extension):
         header = """
-// Generated Fossil Logic Test Runner
+// Generated Fossil Logic Test
 """
 
         if extension == 'c':
             header += """
-#include <fossil/xtest.h>
-
-// * * * * * * * * * * * * * * * * * * * * * * * *
-// * Fossil Logic Test List
-// * * * * * * * * * * * * * * * * * * * * * * * *"""
+#include <fossil/unittest.h>
+"""
         elif extension == 'cpp':
             header += """
-#include <fossil/xtest.h>
-
-// * * * * * * * * * * * * * * * * * * * * * * * *
-// * Fossil Logic Test List
-// * * * * * * * * * * * * * * * * * * * * * * * *"""
+#include <fossil/unittest.h>
+"""
         elif extension == 'm':
             header += """
-#import <fossil/xtest.h>
-
-// * * * * * * * * * * * * * * * * * * * * * * * *
-// * Fossil Logic Test List
-// * * * * * * * * * * * * * * * * * * * * * * * *"""
+#import <fossil/unittest.h>
+"""
         elif extension == 'mm':
             header += """
-#import <fossil/xtest.h>
+#import <fossil/unittest.h>
+"""
+
+        header += """
 
 // * * * * * * * * * * * * * * * * * * * * * * * *
 // * Fossil Logic Test List
-// * * * * * * * * * * * * * * * * * * * * * * * *"""
+// * * * * * * * * * * * * * * * * * * * * * * * *\n"""
 
-        extern_pools = '\n'.join([f"XTEST_EXTERN_POOL({group});" for group in test_groups])
+        extern_pools = '\n'.join([f"FOSSIL_TEST_EXPORT({group});" for group in test_groups])
 
         runner = """
+
 // * * * * * * * * * * * * * * * * * * * * * * * *
 // * Fossil Logic Test Runner
-// * * * * * * * * * * * * * * * * * * * * * * * *
-"""
+// * * * * * * * * * * * * * * * * * * * * * * * *"""
 
         if extension == 'c':
             runner += """
 int main(int argc, char **argv) {
-    XTEST_CREATE(argc, argv);\n"""
+    FOSSIL_TEST_CREATE(argc, argv);\n"""
         elif extension == 'cpp':
             runner += """
 int main(int argc, char **argv) {
-    XTEST_CREATE(argc, argv);\n"""
+    FOSSIL_TEST_CREATE(argc, argv);\n"""
         elif extension == 'm':
             runner += """
-int main(int argc, char **argv) {\n
-    XTEST_CREATE(argc, argv);\n"""
+int main(int argc, const char **argv) {
+    FOSSIL_TEST_CREATE(argc, argv);\n\n"""
         elif extension == 'mm':
             runner += """
-int main(int argc, char **argv) {\n
-    XTEST_CREATE(argc, argv);\n"""
+int main(int argc, const char **argv) {
+    FOSSIL_TEST_CREATE(argc, argv);\n\n"""
 
-        import_pools = '\n'.join([f"    XTEST_IMPORT_POOL({group});" for group in test_groups])
+        import_pools = '\n'.join([f"    FOSSIL_TEST_IMPORT({group});" for group in test_groups])
 
         footer = """
-    return XTEST_ERASE();
+    FOSSIL_TEST_RUN();
+    return FOSSIL_TEST_ERASE();
 } // end of func
 """
 
@@ -94,9 +89,8 @@ int main(int argc, char **argv) {\n
             file.write("\n")
             file.write(footer)
 
-# Example usage:
 generator = TestRunnerGenerator()
-extensions = ['c', 'cpp', 'm', 'mm']  # Add more extensions as needed
+extensions = ['c']
 for ext in extensions:
     test_groups = generator.find_test_groups(ext)
     generator.generate_test_runner(test_groups, ext)
