@@ -41,5 +41,5 @@ int fossil_app_main(int argc, char **argv) {
         // Close the file
         fossil_fstream_close(&io);
     }
-    return FSCL_SUCCESS;
+    return FOSSIL_SUCCESS;
 } // end of func
