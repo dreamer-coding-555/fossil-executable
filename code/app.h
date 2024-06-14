@@ -14,6 +14,7 @@ Description:
 #define FOSSIL_APP_H
 
 #include <fossil/stdio.h>    // core framework
+#include <fossil/stdtool.h>
 #include <fossil/string.h>  // string library
 
 #endif
