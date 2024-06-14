@@ -23,23 +23,23 @@ Description:
  * @return     The result of the app code execution.
  */
 int fossil_app_main(int argc, char **argv) {
-    cstream io;  // Declare a cstream structure for file I/O
+    fossil_stream_t io;  // Declare a cstream structure for file I/O
 
     // Attempt to open the file "data.txt" in read-only mode
-    if (fscl_stream_open(&io, "data.txt", "r") == 0) {
+    if (fossil_fstream_open(&io, "data.txt", "r") == 0) {
         char buffer[256];  // Declare a buffer to store file content
 
         // Read data from the file into the buffer
-        size_t read_count = fscl_stream_read(&io, buffer, sizeof(char), sizeof(buffer) - 1);
+        size_t read_count = fossil_fstream_read(&io, buffer, sizeof(char), sizeof(buffer) - 1);
         
         // Null-terminate the string
-        buffer[read_count] = cterminator;
+        buffer[read_count] = cterm;
 
         // Print the content of the file to the console
-        fscl_console_out("Read from file: f{str}\n", buffer);
+        fossil_console_out("Read from file: f{str}\n", buffer);
 
         // Close the file
-        fscl_stream_close(&io);
+        fossil_fstream_close(&io);
     }
     return FSCL_SUCCESS;
 } // end of func
