@@ -13,15 +13,7 @@ Description:
 #ifndef FOSSIL_APP_H
 #define FOSSIL_APP_H
 
-/**
- * This section of the code includes the necessary header files provided by the Fossil Logic Software Development Kit (SDK).
- * 
- * - <fossil/xcore.h>:   Includes the core framework functionalities.
- * - <fossil/xtool.h>:   Includes base utilities for the application.
- * - <fossil/xstring.h>: Includes the string library for string manipulations.
- */
-#include <fossil/xcore.h>    // core framework
-#include <fossil/xtool.h>    // base utilities
-#include <fossil/xstring.h>  // string library
+#include <fossil/stdio.h>    // core framework
+#include <fossil/string.h>  // string library
 
 #endif
