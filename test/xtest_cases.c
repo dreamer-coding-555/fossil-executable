@@ -37,7 +37,7 @@ FOSSIL_TEST(app_name_case) {
 }
 
 FOSSIL_TEST(app_version_case) {
-    ASSUME_ITS_CNULL("0.1.0");
+    ASSUME_NOT_CNULL("0.1.0");
 }
 
 // * * * * * * * * * * * * * * * * * * * * * * * *
