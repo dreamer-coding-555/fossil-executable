@@ -12,7 +12,7 @@ Description:
 */
 #include "app.h" // app source code
 
-#include <fossil/xtest.h>   // basic test tools
+#include <fossil/unittest.h>   // basic test tools
 #include <fossil/xassume.h> // extra asserts
 
 // * * * * * * * * * * * * * * * * * * * * * * * *
@@ -32,18 +32,18 @@ Description:
 // as samples for library usage.
 // * * * * * * * * * * * * * * * * * * * * * * * *
 
-XTEST(app_name_case) {
-    TEST_ASSUME_CNULLPTR(cnullptr);
+FOSSIL_TEST(app_name_case) {
+    ASSUME_ITS_CNULL(cnullptr);
 }
 
-XTEST(app_version_case) {
-    TEST_ASSUME_NOT_CNULLPTR("0.1.0");
+FOSSIL_TEST(app_version_case) {
+    ASSUME_ITS_CNULL("0.1.0");
 }
 
 // * * * * * * * * * * * * * * * * * * * * * * * *
 // * Fossil Logic Test Pool
 // * * * * * * * * * * * * * * * * * * * * * * * *
-XTEST_DEFINE_POOL(basic_group) {
-    XTEST_RUN_UNIT(app_name_case);
-    XTEST_RUN_UNIT(app_version_case);
+FOSSIL_TEST_GROUP(basic_group) {
+    ADD_TEST(app_name_case);
+    ADD_TEST(app_version_case);
 } // end of fixture
