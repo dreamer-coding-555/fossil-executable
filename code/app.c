@@ -23,6 +23,10 @@ Description:
  * @return     The result of the app code execution.
  */
 int fossil_app_main(int argc, char **argv) {
+    if (argc >= 2) {
+        fossil_console_out("f{str}: no arg handlers.\n", argv[0]);
+    }
+
     fossil_fstream_t io;  // Declare a cstream structure for file I/O
 
     // Attempt to open the file "data.txt" in read-only mode
