@@ -24,7 +24,7 @@ Description:
  */
 int fossil_app_main(int argc, char **argv) {
     if (argc >= 2) {
-        fossil_console_out("f{str}: no arg handlers.\n", argv[0]);
+        fossil_console_out("%s: no arg handlers.\n", argv[0]);
     }
 
     fossil_fstream_t io;  // Declare a cstream structure for file I/O
@@ -40,7 +40,7 @@ int fossil_app_main(int argc, char **argv) {
         buffer[read_count] = cterm;
 
         // Print the content of the file to the console
-        fossil_console_out("Read from file: f{str}\n", buffer);
+        fossil_console_out("Read from file: %s\n", buffer);
 
         // Close the file
         fossil_fstream_close(&io);
