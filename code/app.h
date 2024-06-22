@@ -15,6 +15,6 @@ Description:
 
 #include <fossil/io/ostream.h>
 #include <fossil/io/fstream.h>
-#include <fossil/string/cstring.h>  // string library
+#include <fossil/strings/cstring.h>  // string library
 
 #endif
