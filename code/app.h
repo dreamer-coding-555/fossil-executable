@@ -13,8 +13,8 @@ Description:
 #ifndef FOSSIL_APP_H
 #define FOSSIL_APP_H
 
-#include <fossil/stdio.h>    // core framework
-#include <fossil/stdtool.h>
-#include <fossil/string.h>  // string library
+#include <fossil/io/ostream.h>
+#include <fossil/io/fstream.h>
+#include <fossil/string/cstring.h>  // string library
 
 #endif
