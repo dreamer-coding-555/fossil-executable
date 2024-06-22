@@ -3,14 +3,13 @@
 # ======================
 [wrap-git]
 url = https://github.com/dreamer-coding-555/fossil-sdk.git
-revision = v1.0.1
+revision = v1.0.2
 
 [provide]
 fossil-sdk           = fossil_sdk_dep
 fossil-sdk-io        = fossil_sdk_io_dep
 fossil-sdk-core      = fossil_sdk_core_dep
 fossil-sdk-strings   = fossil_sdk_strings_dep
-fossil-sdk-algorithm = fossil_sdk_algorithm_dep
 fossil-sdk-structure = fossil_sdk_structure_dep
 fossil-sdk-threads   = fossil_sdk_threads_dep
 fossil-sdk-generic   = fossil_sdk_generic_dep
